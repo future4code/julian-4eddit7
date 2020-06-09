@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import FormItem from '../FormItem';
 import CardPost from '../CardPost';
+import { useHistory } from "react-router-dom"
+
+
+
 
 const FeedPageContainer = styled.div`
   margin: 0px;
@@ -65,6 +69,18 @@ const AllPostsButton = styled.button`
 `
 
 function FeedPage() {
+  const history = useHistory()
+
+  useEffect(() => {
+
+    const token = localStorage.getItem("token");
+
+    if (token === null) {
+      history.push("/login");
+    }
+  }, [history]);
+
+
   return (
     <FeedPageContainer>
 
