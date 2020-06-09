@@ -1,13 +1,10 @@
-import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import FormItem from '../FormItem';
 import CardPost from '../CardPost';
-import { useHistory } from "react-router-dom"
-
-
-
+import NavBar from '../NavBar';
+import { useHistory } from "react-router-dom";
 
 const FeedPageContainer = styled.div`
   margin: 0px;
@@ -28,46 +25,6 @@ const FeedPostContent = styled.div`
   height: auto;
 `
 
-const NavBarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  background-color: cadetblue;
-  padding: 15px;
-  justify-content: space-evenly;
-  border-bottom: 2px solid grey;
-`
-
-const SearchBar = styled.div`
-`
-
-const Input = styled.input`
-  padding: 5px;
-  border-radius: 25px;
-  border: 1px solid grey;
-`
-
-const SearchButton = styled.button`
-  padding: 5px;
-  border: 1px outset cadetblue;
-  background-color: #DEDEDE;
-  border-radius: 10px;
-  margin-left: 10px;
-
-  :hover {
-    cursor: pointer;
-`
-
-const AllPostsButton = styled.button`
-  padding: 7px;
-  border: 1px outset grey;
-  background-color: darkorange;
-  border-radius: 10px;
-  margin-left: 10px;
-
-  :hover {
-    cursor: pointer;
-`
-
 function FeedPage() {
   const history = useHistory()
 
@@ -84,18 +41,7 @@ function FeedPage() {
   return (
     <FeedPageContainer>
 
-      <NavBarContainer>
-
-        <SearchBar>
-          <Input type='text' placeholder='O que está procurando?' />
-          <SearchButton>Buscar</SearchButton>
-        </SearchBar>
-
-        <Link to={'/posts'}>
-          <AllPostsButton>Todos os posts</AllPostsButton>
-        </Link>
-
-      </NavBarContainer>
+      <NavBar />
 
       <FeedPageContent>
 
@@ -104,7 +50,6 @@ function FeedPage() {
           <h2>Feed</h2>
 
           <FormItem />
-
 
           <CardPost />
 
@@ -115,7 +60,6 @@ function FeedPage() {
         </FeedPostContent>
 
       </FeedPageContent>
-
 
     </FeedPageContainer>
   );
