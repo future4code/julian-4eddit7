@@ -56,7 +56,7 @@ function SignUpPage() {
 const history = useHistory()
 
 const mudarPagina = () => {
-    history.push("/posts")
+    history.push("/")
 }
 
   const [usuario, setUsuario] = useState("");
@@ -88,12 +88,10 @@ const mudarPagina = () => {
         body
       )
       .then(response => {
-        console.log(response.data.token)
         localStorage.setItem("token", response.data.token)
         mudarPagina()
       })
       .catch(error => {
-        console.log(error.response.data);
         alert('usuario ja cadastrado')
       });
   };
