@@ -7,8 +7,9 @@ const NavBarContainer = styled.div`
   flex-direction: row;
   background-color: cadetblue;
   padding: 15px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-bottom: 2px solid grey;
+  align-items: center;
 `
 
 const SearchBar = styled.div`
@@ -49,6 +50,11 @@ const LogOutButton = styled.button`
     color: grey;
 `
 
+const LogoHorizontal = styled.img`
+    width: 12%;
+
+`
+
 function NavBar() {
     const history = useHistory();
 
@@ -59,6 +65,8 @@ function NavBar() {
 
     return (
         <NavBarContainer>
+
+           <LogoHorizontal src='https://files.slack.com/files-tmb/TLAVDH7C2-F015EN29SU9-2a22b0ef68/labeddit2_480.png' />
 
             <SearchBar>
                 <Input type='text' placeholder='O que está procurando?' />
