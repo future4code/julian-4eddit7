@@ -11,24 +11,39 @@ const FormItemContainer = styled.div`
 
 const FormItemContent = styled.div`
   display: flex;
-  flex-direction: row;
+  //flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `
 
-const Input = styled.input`
+const InputText = styled.input`
   border-radius: 15px;
   border: 1px solid #DEDEDE;
-  width: 70%;
+  width: 90%;
   height: 50px;
   background-color: #f5f5f5;
-  margin-right: 20px;
   font-size: 15px;
+`
+
+const InputTitle = styled.input`
+  border-radius: 15px;
+  border: 1px solid #DEDEDE;
+  background-color: #f5f5f5;
+  font-size: 15px;
+  width: 90%;
+  height: 20px;
+  margin-bottom: 10px;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
 `
   
 const IconUser = styled.img`
-  margin-right: 20px;
-  border-radius: 100px;
+  padding-right: 15px;
 `
 
 const Button = styled.button`
@@ -53,10 +68,19 @@ function FormItem() {
 
         <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
 
-        <Input
-          type='text'
-          placeholder='Criar post'
-        />
+        <InputContainer>
+        
+          <InputTitle
+            type='text'
+            placeholder='Título'
+          />
+
+          <InputText
+            type='text'
+            placeholder='Criar post'
+          />
+        
+        </InputContainer>
 
         <Button onClick={''}>Postar</Button>
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import styled from 'styled-components';
 
@@ -20,7 +20,6 @@ const Text = styled.p`
   border: 1px solid #DEDEDE;
   height: auto;
   background-color: #f5f5f5;
-  margin-right: 20px;
   font-size: 15px;
 `
 
@@ -31,8 +30,7 @@ const IdUser = styled.div`
 
 const IconUser = styled.img`
   width: 60px;
-  /*border-radius: 100px;
-*/`
+`
 
 const UserName = styled.h5`
   color: darkorange;
@@ -77,52 +75,58 @@ const DownVoteIcon = styled.p`
   }
 `
 
-  function FeedPage() {
-    const [posts, setPosts] = useState([])
+const Title = styled.h4`
+`
 
-    useEffect(() => {
-  const token = localStorage.getItem("token")
+function FeedPage() {
+  const [posts, setPosts] = useState([])
 
-  axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts', {
-    headers: { "Content-Type": "application/json",
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+
+    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts', {
+      headers: {
+        "Content-Type": "application/json",
         Authorization: token
-       } 
-}).then((response) => {
-    console.log(response.data.posts)
-    setPosts(response.data.posts)
-}).catch(error => {
-    console.log(error.response)
-}) }, []);
+      }
+    }).then((response) => {
+      console.log(response.data.posts)
+      setPosts(response.data.posts)
+    }).catch(error => {
+      console.log(error.response)
+    })
+  }, []);
 
 
-    return (
-      <>  
+  return (
+    <>
       {posts.map(function (post) {
-          return (
-            <>  
-    <CardPostContainer>
-      <CardPostContent>
-        <IdUser>
-          <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
-          <UserName>{post.username}</UserName>
-        </IdUser>
-        
-        <Text>{post.text}</Text>
-        
-        <Reactions>
-          <KarmaSection>
-            <UpVoteIcon><img src="https://images2.imgbox.com/52/c5/Eu59V4Kx_o.png" /></UpVoteIcon>
-            <DownVoteIcon><img src="https://images2.imgbox.com/d3/c8/XT3Iik1e_o.png" /></DownVoteIcon>
-          </KarmaSection>
+        return (
+          <>
+            <CardPostContainer>
+              <CardPostContent>
+                <IdUser>
+                  <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
+                  <UserName>{post.username}</UserName>
+                </IdUser>
 
-          <CommentSection>
-            <h5>{post.commentsCount} Comentarios</h5>
-          </CommentSection>
-        </Reactions>
-        </CardPostContent>
-        </CardPostContainer>
-        </>
-          )
+                <Title>{post.title}</Title>
+                <Text>{post.text}</Text>
+
+                <Reactions>
+                  <KarmaSection>
+                    <UpVoteIcon><img src="https://images2.imgbox.com/52/c5/Eu59V4Kx_o.png" /></UpVoteIcon>
+                    <DownVoteIcon><img src="https://images2.imgbox.com/d3/c8/XT3Iik1e_o.png" /></DownVoteIcon>
+                  </KarmaSection>
+
+                  <CommentSection>
+                    <h5>{post.commentsCount} Comentarios</h5>
+                  </CommentSection>
+                </Reactions>
+              </CardPostContent>
+            </CardPostContainer>
+          </>
+        )
       })}
     </>
   );
