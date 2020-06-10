@@ -100,29 +100,33 @@ const mudarPagina = () => {
     <SignUpPageContainer>
       <SignUpPageContent>
         <Title>Cadastro</Title>
-
+        
         <InputContainer>
           <Input
             onChange={inputUsuario}
             value={usuario}
             type="text"
             placeholder="Nome de Usuario"
+            required
           />
           <Input
             onChange={inputEmail}
             value={email}
             type="text"
             placeholder="Email"
+            required
           />
           <Input
             onChange={inputSenha}
             value={senha}
             type="password"
             placeholder="Senha"
+            required
           />
         </InputContainer>
 
         <CadastroButton onClick={fazerCadastro}>Cadastrar</CadastroButton>
+    
       </SignUpPageContent>
     </SignUpPageContainer>
   );
