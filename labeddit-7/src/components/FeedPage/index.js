@@ -53,10 +53,6 @@ function FeedPage() {
 
           <CardPost />
 
-          <CardPost />
-
-          <CardPost />
-
         </FeedPostContent>
 
       </FeedPageContent>

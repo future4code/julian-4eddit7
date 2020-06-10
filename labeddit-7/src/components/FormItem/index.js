@@ -6,7 +6,7 @@ const FormItemContainer = styled.div`
   width: 70%;
   padding: 20px;
   background-color: white;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `
 
 const FormItemContent = styled.div`
@@ -51,7 +51,7 @@ function FormItem() {
 
       <FormItemContent>
 
-        <IconUser src='https://picsum.photos/id/237/20/30' />
+        <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
 
         <Input
           type='text'

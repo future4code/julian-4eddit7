@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios'
 import styled from 'styled-components';
 
 const CardPostContainer = styled.div`
@@ -6,7 +7,7 @@ const CardPostContainer = styled.div`
   width: 70%;
   padding: 20px;
   background-color: white;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `
 
 const CardPostContent = styled.div`
@@ -29,13 +30,13 @@ const IdUser = styled.div`
 `
 
 const IconUser = styled.img`
-  width: 10px;
-  border-radius: 100px;
-`
+  width: 60px;
+  /*border-radius: 100px;
+*/`
 
 const UserName = styled.h5`
   color: darkorange;
-  margin-left: 15px;
+  margin-left: 10px;
 `
 
 const Reactions = styled.div`
@@ -77,32 +78,53 @@ const DownVoteIcon = styled.p`
 `
 
   function FeedPage() {
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+  const token = localStorage.getItem("token")
+
+  axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts', {
+    headers: { "Content-Type": "application/json",
+        Authorization: token
+       } 
+}).then((response) => {
+    console.log(response.data.posts)
+    setPosts(response.data.posts)
+}).catch(error => {
+    console.log(error.response)
+}) }, []);
+
+
     return (
-      <CardPostContainer>
-
+      <>  
+      {posts.map(function (post) {
+          return (
+            <>  
+    <CardPostContainer>
       <CardPostContent>
-
         <IdUser>
-          <IconUser src='https://picsum.photos/id/237/20/30' />
-          <UserName>nome.usuario</UserName>
+          <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
+          <UserName>{post.username}</UserName>
         </IdUser>
         
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+        <Text>{post.text}</Text>
         
         <Reactions>
           <KarmaSection>
-            <UpVoteIcon>^</UpVoteIcon>
-            <DownVoteIcon>v</DownVoteIcon>
+            <UpVoteIcon><img src="https://images2.imgbox.com/52/c5/Eu59V4Kx_o.png" /></UpVoteIcon>
+            <DownVoteIcon><img src="https://images2.imgbox.com/d3/c8/XT3Iik1e_o.png" /></DownVoteIcon>
           </KarmaSection>
 
           <CommentSection>
-            <h5>Comentarios</h5>
+            <h5>{post.commentsCount} Comentarios</h5>
           </CommentSection>
         </Reactions>
-
-      </CardPostContent>
-
-    </CardPostContainer>
+        </CardPostContent>
+        </CardPostContainer>
+        </>
+          )
+      })}
+    </>
   );
 }
 
