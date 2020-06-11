@@ -27,10 +27,9 @@ const SearchButton = styled.button`
   background-color: #DEDEDE;
   border-radius: 10px;
   margin-left: 10px;
+    &:hover {
+    cursor: pointer;} `
 
-  :hover {
-    cursor: pointer;
-`
 
 const AllPostsButton = styled.button`
   padding: 7px;
@@ -40,7 +39,7 @@ const AllPostsButton = styled.button`
   margin-left: 10px;
 
   :hover {
-    cursor: pointer;
+    cursor: pointer;}
 `
 
 const LogOutButton = styled.button`
@@ -66,7 +65,7 @@ function NavBar() {
     return (
         <NavBarContainer>
 
-           <LogoHorizontal src='https://files.slack.com/files-tmb/TLAVDH7C2-F015EN29SU9-2a22b0ef68/labeddit2_480.png' />
+           <LogoHorizontal src='https://images2.imgbox.com/9a/da/CnbdMouA_o.png' />
 
             <SearchBar>
                 <Input type='text' placeholder='O que está procurando?' />
