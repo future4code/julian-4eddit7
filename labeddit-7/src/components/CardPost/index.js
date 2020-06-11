@@ -90,7 +90,6 @@ function FeedPage() {
         Authorization: token
       }
     }).then((response) => {
-      console.log(response.data.posts)
       setPosts(response.data.posts)
     }).catch(error => {
       console.log(error.response)

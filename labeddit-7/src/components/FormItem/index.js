@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const FormItemContainer = styled.div`
   border: 1px solid #DEDEDE;
@@ -41,7 +42,7 @@ const InputContainer = styled.div`
   flex-grow: 1;
   align-items: center;
 `
-  
+
 const IconUser = styled.img`
   padding-right: 15px;
 `
@@ -61,6 +62,45 @@ const Button = styled.button`
 `
 
 function FormItem() {
+  const useForm = initialValues => {
+    const [form, setForm] = useState(initialValues)
+
+  const onChange = (name, value) => {
+    const newForm = { ...form, [name]: value }
+    setForm(newForm)
+  }
+
+  return { form, onChange }
+  }
+
+  const { form, onChange } = useForm({
+    text: '',
+    title: ''
+  })
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
+
+  const handleInputChange = e => {
+    const { value, name } = e.target
+    onChange(name, value)
+  }
+
+  const createPost = () => {
+    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts', form, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(response => {
+      console.log(response.data)
+
+    }).catch(error => {
+      console.log('deu erro...', error.data)
+    })
+  }
+
   return (
     <FormItemContainer>
 
@@ -69,20 +109,32 @@ function FormItem() {
         <IconUser src='https://images2.imgbox.com/59/ef/lwVsBQOW_o.png' />
 
         <InputContainer>
-        
+
+        <form onSubmit={handleSubmit}>
+
           <InputTitle
+            name='title'
+            value={form.title}
+            onChange={handleInputChange}
             type='text'
-            placeholder='Título'
+            placeholder='Dê um título ao post'
+            required
           />
 
           <InputText
+            name='text'
+            value={form.text}
+            onChange={handleInputChange}
             type='text'
-            placeholder='Criar post'
+            placeholder='No que está pensando?'
+            required
           />
-        
+
+        </form>
+
         </InputContainer>
 
-        <Button onClick={''}>Postar</Button>
+        <Button onClick={createPost}>Postar</Button>
 
       </FormItemContent>
 
