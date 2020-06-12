@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import styled from 'styled-components'
+import { Paper } from '@material-ui/core'
+import axios from 'axios'
 import { CardPostContainer,
-         CardPostContent,
-         Text,
-         IdUser,
-         IconUser,
-         UserName,
-         Reactions,
-         CommentSection,
-         KarmaSection,
-         UpVoteIcon,
-         DownVoteIcon,
-         Title,
-         SendComment,
-         Input,
-         Button } from './style';
+  CardPostContent,
+  Text,
+  IdUser,
+  IconUser,
+  UserName,
+  Reactions,
+  CommentSection,
+  KarmaSection,
+  UpVoteIcon,
+  DownVoteIcon,
+  Title,
+  SendComment,
+  Input,
+  Button } from './style';
 
+
+const CaixaDeComentarios = styled(Paper)`
+margin-top: 20px;
+`
 
 function FeedPage() {
+
   const [posts, setPosts] = useState([])
   const [comentarios, setComentarios] = useState("")
+  const [id, setId] = useState("")
+  const [comment, setComment] = useState([])
 
+
+  // AXIOS PEGAR POSTAGENS
   useEffect(() => {
     const token = localStorage.getItem("token") 
 
@@ -34,45 +45,54 @@ function FeedPage() {
     }).catch(error => {
       console.log(error.response)
     })
+
   }, []);
+
 
 
   const inputDoComentario = (event) => {
       setComentarios(event.target.value)
   }
 
-  
-  const enviarComentario = () => {  
+  // AXIOS ENVIAR COMENTARIO
+  const enviarcomentario = () => {  
 
     const body = {
         text: comentarios
       }
          
-    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${IdUser}/comment`, body,{
+    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${localStorage.getItem("id")}/comment`, body,{
       headers: {
-       "Content-Type": "application/json",
+      "Content-Type": "application/json",
         Authorization: localStorage.getItem("token")
       }
     }).then((response) => {
-        console.log('id comentario', response.data)
+        console.log(response.data)
+        console.log(localStorage.getItem("id"))
     }).catch(error => {
         console.log(error.response)
+        console.log(`${id}`)
     })
   }
 
-  const votePost = (id, vote) => {
-    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${IdUser}/vote`, {
+  // AXIOS PEGAR COMENTARIOS
+  const pegarcomentarios = () => {
+
+    axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${localStorage.getItem("id")}`, {
       headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
         Authorization: localStorage.getItem("token")
-      }
-    }).then((response) => {
-      console.log('Vote post', response.data)
+      }}).then((response) => {
+        console.log(response.data.post.comments)
+        setComment(response.data.post.comments)
+        console.log(localStorage.getItem("id"))
     }).catch(error => {
-      console.log(error.response)
+        console.log(error.response)
+        console.log(localStorage.getItem("id"))
     })
   }
 
+  
   return (
     <>
       {posts.map(function (post) {
@@ -95,13 +115,19 @@ function FeedPage() {
                   </KarmaSection>
 
                   <CommentSection>
-                    <h5>{post.commentsCount} Comentarios</h5>
+                    <h5 onClick={() => (localStorage.setItem("id", post.id), pegarcomentarios())}> {post.commentsCount} Comentarios</h5>
                   </CommentSection>
                 </Reactions>
                 <SendComment>
-                <Input onChange={inputDoComentario} value={comentarios} placeholder="publique um comentario" ></Input>  
-                <Button onClick={3n}>enviar</Button>         
+                <Input onChange={inputDoComentario} value={comentarios} id="date.now" name="comentarios" placeholder="publique um comentario" />
+                <Button onClick={() => (localStorage.setItem("id", post.id), enviarcomentario())}>enviar</Button>        
                 </SendComment>
+                <CaixaDeComentarios variant="outlined">
+                {comment.map(function (post) {
+                  return <ul><li>{post.text}</li></ul>  
+                })}
+                </CaixaDeComentarios>
+               {/* <span>{post.id}</span> */}
               </CardPostContent>
             </CardPostContainer>
           </>
