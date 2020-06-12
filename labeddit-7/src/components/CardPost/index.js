@@ -127,7 +127,6 @@ function FeedPage() {
                     return <ul><li>{post.text}</li></ul>
                   })}
                 </CaixaDeComentarios>
-                {/* <span>{post.id}</span> */}
               </CardPostContent>
             </CardPostContainer>
           </>
