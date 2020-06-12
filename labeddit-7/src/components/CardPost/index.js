@@ -113,7 +113,7 @@ function FeedPage() {
                   </KarmaSection>
 
                   <CommentSection>
-                    <h5 onClick={() => (localStorage.setItem("id", post.id), pegarComentarios())}> {post.id.commentsCount} Comentarios</h5>
+                    <h5 onClick={() => (localStorage.setItem("id", post.id), pegarComentarios())}>{post.commentsCount}Comentarios</h5>
                   </CommentSection>
                 </Reactions>
 
