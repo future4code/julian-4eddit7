@@ -8,7 +8,7 @@ import { FormItemContainer,
          IconUser,
          Button } from './style';
 
-function FormItem() {
+function FormItem(props) {
   const useForm = initialValues => {
     const [form, setForm] = useState(initialValues)
 
@@ -42,7 +42,6 @@ function FormItem() {
       }
     }).then(response => {
       console.log(response.data)
-      
 
     }).catch(error => {
       console.log('deu erro...', error.data)
