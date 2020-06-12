@@ -1,42 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ErrorPageContainer,
+         ErrorPageContent,
+         ButtonGoBackFeed,
+         Title,
+         CatGif404 } from './style';
 
 import NavBar from '../NavBar';
-
-const ErrorPageContainer = styled.div`
-  margin: 0;
-  width: 100%;
-`
-
-const ErrorPageContent = styled.div`
-  height: 91vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const ButtonGoBackFeed = styled.button`
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: cadetblue;
-  border: none;
-  position: relative;
-  margin-bottom: 100px;
-
-  :hover {
-    font-weight: bolder;
-  }
-`
-
-const Title = styled.h2`
-  color: darkorange;
-`
-
-const CatGif404 = styled.img`
-  width: 40%;
-`
 
 function ErrorPage() {
   return (

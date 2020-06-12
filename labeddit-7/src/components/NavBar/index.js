@@ -1,66 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { NavBarContainer,
+        SearchBar,
+        Input,
+        SearchButton,
+        AllPostsButton,
+        LogOutButton,
+        LogoHorizontal } from './style';
 
-const NavBarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  background-color: cadetblue;
-  padding: 15px;
-  justify-content: space-between;
-  border-bottom: 2px solid grey;
-  align-items: center;
-`
-
-const SearchBar = styled.div`
-`
-
-const Input = styled.input`
-  padding: 5px;
-  border-radius: 25px;
-  border: 1px solid grey;
-`
-
-const SearchButton = styled.button`
-  padding: 5px;
-  border: 1px outset cadetblue;
-  background-color: #DEDEDE;
-  border-radius: 10px;
-  margin-left: 10px;
-    &:hover {
-    cursor: pointer;} `
-
-
-const AllPostsButton = styled.button`
-  padding: 7px;
-  border: 1px outset grey;
-  background-color: darkorange;
-  border-radius: 10px;
-  margin-left: 10px;
-
-  :hover {
-    cursor: pointer;}
-`
-
-const LogOutButton = styled.button`
-    cursor: pointer;
-    border-radius: 15px;
-    border: 1px solid grey;
-    color: grey;
-`
-
-const LogoHorizontal = styled.img`
-    width: 12%;
-
-`
 
 function NavBar() {
+    const [inputSearch, setInputSearch] = useState('');
+
     const history = useHistory();
 
     const handleLogOut = () => {
+        alert('Deseja mesmo sair?')
         localStorage.clear();
         history.push('/login')
     }
+
+    const onChangeInput = (e) => {
+        setInputSearch(e.target.value)
+    }
+
+    //TODO fazer filtro de busca
+    const filteredSearch = () => {
+        
+    }
+
 
     return (
         <NavBarContainer>
@@ -68,7 +36,7 @@ function NavBar() {
            <LogoHorizontal src='https://images2.imgbox.com/9a/da/CnbdMouA_o.png' />
 
             <SearchBar>
-                <Input type='text' placeholder='O que está procurando?' />
+                <Input type='text' placeholder='O que está procurando?' value={inputSearch} onChange={onChangeInput}/>
                 <SearchButton>Buscar</SearchButton>
             </SearchBar>
 

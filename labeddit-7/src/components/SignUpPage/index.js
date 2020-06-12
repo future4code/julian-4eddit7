@@ -1,55 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom"
 
-const SignUpPageContainer = styled.div`
-  margin: 0;
-`;
-
-const SignUpPageContent = styled.div`
-  border: 1px outset grey;
-  padding: 35px;
-  border-radius: 25px;
-  width: 255px;
-  height: 330px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  border-radius: 25px;
-  border: 1px solid grey;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const CadastroButton = styled.button`
-  padding: 10px;
-  border: 1px solid cadetblue;
-  color: cadetblue;
-  border-radius: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  :hover {
-    font-weight: bolder;
-    color: cadetblue;
-    background-color: white;
-    cursor: pointer;
-  }
-`;
-
-const Title = styled.h2`
-  display: flex;
-  justify-content: center;
-`;
-
+import { SignUpPageContainer,
+         SignUpPageContent,
+         InputContainer,
+         Input,
+         CadastroButton,
+         Title } from './style';
 
 function SignUpPage() {
 
@@ -92,7 +50,8 @@ const mudarPagina = () => {
         mudarPagina()
       })
       .catch(error => {
-        alert('usuario ja cadastrado')
+        alert('Usuário já cadastrado. Deseja fazer login?')
+        history.push('/login')
       });
   };
 
@@ -113,7 +72,7 @@ const mudarPagina = () => {
             onChange={inputEmail}
             value={email}
             type="text"
-            placeholder="Email"
+            placeholder="E-mail"
             required
           />
           <Input
