@@ -1,29 +1,13 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 
 import FormItem from '../FormItem';
 import CardPost from '../CardPost';
 import NavBar from '../NavBar';
 import { useHistory } from "react-router-dom";
 
-const FeedPageContainer = styled.div`
-  margin: 0px;
-  width: 100%;
-  height: 100vh;
-`
-
-const FeedPageContent = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-  background-color: aliceblue;
-`
-
-const FeedPostContent = styled.div`
-  width: 80%;
-  height: auto;
-`
+import { FeedPageContainer,
+         FeedPageContent,
+         FeedPostContent } from './style';
 
 function FeedPage() {
   const history = useHistory()
