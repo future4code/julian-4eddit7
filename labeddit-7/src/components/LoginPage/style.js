@@ -78,9 +78,7 @@ export const LeftContainer = styled.div`
   flex-grow: 1;
   width: 100%;
   height: 100vh;
-  //background: url('https://i.pinimg.com/736x/46/db/f5/46dbf5a6cb51fce666cb96f4fc01d91f.jpg');
   background: url('https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-full-fantasy-night-aurora-background-nightauroralight-backgroundhand-paintedstarry-image_68228.jpg');
-  //background: url('https://image.freepik.com/vetores-gratis/raios-azuis-subindo-em-fundo-escuro_48799-343.jpg');
   background-size: cover;
 `
 
